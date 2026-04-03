@@ -6,9 +6,6 @@ intelligence as input and produces
 campaign-ready outputs across paid
 search, LinkedIn, email, and ABM —
 from a single plain-English brief.
-Built by John Keane as a portfolio
-project demonstrating systems-level
-thinking in demand generation.
 
 The Problem This Solves
 Most demand gen work is repetitive,
@@ -28,7 +25,7 @@ Engine — a set of skills that
 never change. Each skill is a
 structured instruction file that
 tells Claude Code exactly how to
-research, reasd produce output
+research, read, produce output
 for a specific job. The skills are
 company-agnostic.
 Fuel — a set of context files
@@ -62,7 +59,7 @@ all from that one sentence.
 Skills
 Campaign Orchestrator
 Entry point. Reads a plain English
-brief and routes to torrect skill
+brief and routes to the correct skill
 chain. Pre-flight check shows every
 decision before execution. Waits for
 confirmation before running.
@@ -71,7 +68,7 @@ Deep research skill producing 11 files:
 4 core context files and 7 deep-dive
 files. Sources: company website,
 G2/Capterra reviews, LinkedIn job
-postings, competitor sites, industry
+postings, competitor sites, and industry
 research. Depth prioritization: voice
 of customer, persona depth, objection
 depth, and competitive intelligence
@@ -96,9 +93,9 @@ vocabulary match, intent fit,
 winnability, and strategic value.
 Groups by intent cluster with negative
 keyword recommendations. Staleness
-check: reuses files under 6 weeks old.
+Check: reuses files under 6 weeks old.
 Landing Page Brief
-Complete page specification including
+Complete page specification, including
 message match map per ad variant,
 above-the-fold spec, proof point
 hierarchy with placement rationale,
@@ -155,7 +152,7 @@ file. Five searches per account per
 run. Signals rated Hot (act within
 48 hours), Warm (act within 2 weeks),
 or Monitor. For every Hot signal:
-verifi source, why it matters,
+verify source, why it matters,
 persona to target first, outreach
 angle, suggested copy hook, and
 a ready-to-use orchestrator brief.
@@ -264,8 +261,8 @@ to cover manually: G2 and Capterra
 reviews, LinkedIn job postings,
 competitor positioning, industry
 research, and analyst reports. The
-output is structured in a format e
-other skill can read directly. Manual
+output is structured in a format that
+other skills can read directly. Manual
 research produces unstructured notes
 that don't feed downstream tools.
 Why does the orchestrator show a
@@ -289,8 +286,3 @@ No external APIs, no databases,
 no infrastructure. The entire system
 runs locally from a single project
 folder.
-
-Contact
-John Keane
-jdkeane8@gmail.com
-[LinkedIn URL — add before sharing]
