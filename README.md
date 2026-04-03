@@ -276,12 +276,6 @@ be created. You can correct anything
 before it runs. Nothing executes
 without explicit confirmation.
 
-Built With
-
-Claude Code (Anthropic)
-Claude Pro subscription
-Cursor (file viewing and terminal)
-
 No external APIs, no databases,
 no infrastructure. The entire system
 runs locally from a single project
