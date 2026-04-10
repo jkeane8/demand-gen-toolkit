@@ -442,7 +442,6 @@ rate than expected gets flagged. Each campaign makes the next one more accurate
 ## Built With
 
 - Claude Code (Anthropic)
-- Claude Pro subscription
 - Cursor (file viewing and terminal)
 
 No external APIs, no databases, no infrastructure. The entire system runs locally
