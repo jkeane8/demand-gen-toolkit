@@ -299,6 +299,39 @@ organiser/SKILL.md passing the
 campaign output file automatically.
 If 'skip': proceed to run summary.
 
+### COMPETITOR AD INTELLIGENCE CHAIN
+
+Triggered by: "competitor ads," "what are
+competitors running," "ad intelligence,"
+"competitive advertising," "competitor brief,"
+or any request to see what a specific competitor
+is advertising.
+
+When triggered, route directly to Competitor
+Ad Intelligence:
+skills/competitor_ad_intelligence/SKILL.md
+
+Skills that run:
+1. Competitor Ad Intelligence — reads all
+   competitors from context/competitors.md
+   and context/deep/competitive_intel.md,
+   searches LinkedIn Ad Library, Google Ads
+   Transparency Center, and Meta Ad Library,
+   produces a brief covering active ads,
+   historical patterns, spend signals, gap
+   analysis, and counter-angle recommendations
+   anchored to proof_points.md, and drafts
+   proposed updates to competitive_intel.md
+   for human review
+
+Note: Competitor Ad Intelligence runs
+standalone. It produces counter-angle
+recommendations with ready-to-use orchestrator
+briefs that the human pastes back in as
+separate runs when ready to act. It does not
+automatically trigger Campaign Writer or
+any other skill.
+
 ### TRIGGER MONITOR CHAIN
 
 Triggered by: "trigger monitor," "weekly briefing,"
@@ -320,6 +353,160 @@ not chain to other skills automatically. It produces
 outreach briefs that the human pastes into the
 orchestrator as separate runs when ready to act
 on a signal.
+
+### SEO CONTENT BRIEF CHAIN
+
+Triggered by: "SEO brief," "content brief," "blog brief,"
+"pillar page," "content cluster," "SEO content," "organic
+content," or any mention of SEO strategy or content planning.
+
+When triggered, do NOT run the standard paid search chain
+(Skills 1-4 above). Instead:
+
+Route directly to the SEO Content Brief:
+skills/seo_content_brief/SKILL.md
+
+Pass the full brief directly, including the stated topic or
+keyword cluster. The skill reads context files and keyword
+files internally. It produces one pillar page brief plus
+3-5 cluster piece briefs with AEO and GEO optimisation
+included in every brief.
+
+The skill checks outputs/ for:
+- An existing keyword file to use as the keyword data source
+  (avoids re-running keyword research if a scored file exists)
+- A Competitor Ad Intelligence report to identify keywords
+  where competitors are strong in both paid and organic
+
+Skills that run:
+1. SEO Content Brief — reads icp.md, competitors.md, market.md,
+   proof_points.md, market_gaps.md, and voice_of_customer.md
+   if available; reads existing keyword file from outputs/ or
+   runs fresh research; checks for competitor ad intelligence
+   reports; produces keyword assignment table with competitor
+   flags, one fully specified pillar page brief, 3-5 cluster
+   piece briefs, and a content calendar recommendation
+
+Note: SEO Content Brief runs standalone. It does not
+automatically trigger Keyword Finder or Campaign Writer.
+If no keyword file exists in outputs/, the skill runs fresh
+research and notes this clearly in the output. If the brief
+covers a topic where paid search is also planned, run the
+Keyword Finder separately first and the SEO Content Brief
+will pick up that file automatically.
+
+### WEBINAR AND EVENT CAMPAIGN BUILDER CHAIN
+
+Triggered by: "webinar," "event campaign," "event promotion,"
+"conference," "virtual event," "in-person event," or any mention
+of a webinar or event alongside a campaign objective.
+
+When triggered, do NOT run the standard paid search chain (Skills
+1-4 above). Instead:
+
+Route directly to the Webinar and Event Campaign Builder:
+skills/webinar_event_campaign_builder/SKILL.md
+
+Pass the full brief directly. The skill reads all context files
+internally. It produces three phases of assets in one run:
+pre-event promotion (registration page brief, email sequence,
+LinkedIn organic posts, LinkedIn paid promotion brief), during-event
+assets (chat prompts and poll questions for webinars; follow-up
+capture brief for in-person events), and three post-event email
+tracks routing contacts based on their behaviour.
+
+Skills that run:
+1. Webinar and Event Campaign Builder — reads icp.md, brand_voice.md,
+   proof_points.md, market.md, and deep-dive files if available;
+   produces all pre-event, during-event, and post-event assets plus
+   a HubSpot workflow architecture summary for all three post-event tracks
+
+Note: Webinar and Event Campaign Builder runs standalone. It produces
+a complete event campaign package. Individual sections (registration
+page brief, email sequences, LinkedIn posts, paid promotion brief)
+can be extracted and used independently. It does not automatically
+chain to Campaign Writer — if new paid social copy is needed for
+promotion beyond the ad copy produced within this skill, run the
+Paid Social Audience Builder separately.
+
+### PAID SOCIAL AUDIENCE BUILDER CHAIN
+
+Triggered by: "paid social," "Meta," "Facebook," "Instagram,"
+"Reddit," "YouTube," "social audiences," "social advertising,"
+or any mention of these channels alongside a campaign objective.
+
+When triggered, do NOT run the standard paid search chain (Skills
+1-4 above). Instead:
+
+Route directly to the Paid Social Audience Builder:
+skills/paid_social_audience_builder/SKILL.md
+
+Pass the full brief directly. The skill reads all context files
+internally. It produces three separate channel briefs in one run —
+Meta, Reddit, and YouTube — each with platform-native targeting
+logic.
+
+If Campaign Writer copy files for Meta, Reddit, or YouTube formats
+exist in outputs/, the skill maps those copy variants to the correct
+audience and channel automatically. No additional step required.
+
+Skills that run:
+1. Paid Social Audience Builder — reads icp.md, brand_voice.md,
+   competitors.md, market.md, and deep-dive files if available;
+   produces cold and retargeting audience specs, campaign objective
+   recommendations, bidding strategy, benchmarks, budget guidance,
+   A/B testing recommendations, and a prerequisite checklist for
+   each of Meta, Reddit, and YouTube; produces a cross-channel
+   summary with launch sequence and copy mapping
+
+Note: Paid Social Audience Builder runs standalone. It does not
+automatically trigger Campaign Writer. If no copy exists in outputs/
+for these channels, it flags this in the copy mapping section and
+instructs the human to run Campaign Writer for the relevant formats
+before launching.
+
+### CRO BRIEF CHAIN
+
+Triggered by: "CRO," "conversion rate,"
+"landing page test," "A/B test the
+landing page," "page is underperforming,"
+"fix the landing page," or any reference
+to conversion optimisation, landing page
+performance, or A/B testing.
+
+When triggered, route directly to the
+CRO Brief:
+skills/cro_brief/SKILL.md
+
+Pass the full brief directly, including
+any pasted copy, pasted HTML, or
+description of the page. The CRO Brief
+reads all context files and scans
+outputs/ for matching ad copy and
+Performance Grader reports internally.
+
+Skills that run:
+1. CRO Brief — reads context files,
+   checks for matching ad copy and
+   Performance Grader report in outputs/,
+   evaluates page elements against ICP
+   vocabulary and brand voice, runs
+   message continuity check between ad
+   and page, produces three prioritised
+   tests with hypothesis, control,
+   challenger copy, sample size
+   calculation, and implementation notes
+
+Note: CRO Brief runs standalone. It
+produces a test plan the human shares
+with their web team for implementation.
+It does not automatically trigger other
+skills, but its findings may point to
+Campaign Writer (to fix ad copy that
+is mismatched to the page) or Landing
+Page Brief (to rebuild the page spec
+from scratch if a full reframe is
+warranted).
 
 ### EMAIL AND NURTURE CHAIN
 
@@ -352,6 +539,36 @@ entirely, run the Context Builder
 first (Skill 1 above), then pass
 the brief to the sequencer. This
 is the only pre-step required.
+
+### BUDGET ALLOCATION MODEL CHAIN
+
+Triggered by: "budget," "allocation,"
+"how should I spend," "channel mix,"
+"spend planning," "budget model," or
+any mention of a dollar amount alongside
+a campaign objective
+
+When triggered, do NOT run the standard
+paid search chain (Skills 1-4 above).
+Instead:
+
+Route directly to the Budget Allocation
+Model:
+skills/budget_allocation_model/SKILL.md
+
+Skills that run:
+1. Budget Allocation Model — reads
+   context files and any available
+   performance data, produces three
+   scenarios with projections and a
+   recommendation
+
+Note: Budget Allocation Model runs
+standalone. It produces a planning
+document the human uses for stakeholder
+conversations and campaign setup — it
+does not automatically trigger other
+skills.
 
 ### PERFORMANCE GRADER CHAIN
 
@@ -626,6 +843,104 @@ prioritized briefing with outreach briefs ready
 to paste into the orchestrator. Runs standalone —
 does not chain to other skills automatically.
 Skill lives at skills/trigger_monitor/SKILL.md.
+
+SEO Content Brief — ACTIVE. Triggered by any mention of SEO
+brief, content brief, blog brief, pillar page, content cluster,
+SEO content, organic content, or SEO strategy. Takes a topic
+or keyword cluster and produces one pillar page brief plus
+3-5 cluster piece briefs, each with target keyword, search
+intent, title tag, meta description, H1, URL slug, section-
+by-section content structure, internal linking map, AEO
+question targets with exact phrasing, GEO citation signals,
+and schema markup recommendations. Reads the existing keyword
+file from outputs/ if available — runs fresh research if not.
+Checks Competitor Ad Intelligence reports for keywords where
+competitors are strong in both paid and organic — flags these
+with a compete-or-pivot recommendation. Produces a content
+calendar sequencing cluster pieces before the pillar. Runs
+standalone — does not chain to other skills automatically.
+Skill lives at skills/seo_content_brief/SKILL.md.
+
+Webinar and Event Campaign Builder — ACTIVE. Triggered by any
+mention of webinar, event campaign, event promotion, conference,
+virtual event, in-person event, or a webinar or event alongside
+a campaign objective. Produces all pre-event promotion assets
+(registration page brief, 3-email pre-event sequence, 3 LinkedIn
+organic posts, LinkedIn paid promotion brief), during-event assets
+(chat prompts and poll questions for webinar; follow-up capture
+brief and networking guide for in-person), and three post-event
+email tracks (Track 1 Attendees — 3 emails over 10 days; Track 2
+No-shows — 3 emails over 14 days; Track 3 Highly Engaged — 2
+emails over 4 days accelerated to sales). Includes a HubSpot
+workflow architecture summary for all three tracks with enrollment
+triggers, branch logic, and suppression conditions. Runs standalone.
+Skill lives at skills/webinar_event_campaign_builder/SKILL.md.
+
+Paid Social Audience Builder — ACTIVE. Triggered by any mention
+of paid social, Meta, Facebook, Instagram, Reddit, YouTube, social
+audiences, or social advertising alongside a campaign objective.
+Produces three separate channel briefs in one run — Meta, Reddit,
+and YouTube — each with cold and retargeting audience specs,
+campaign objective recommendation, bidding strategy, estimated
+reach and CPM benchmarks, budget guidance, A/B testing
+recommendations, and a prerequisite checklist. Connects to Campaign
+Writer copy outputs automatically — maps existing copy variants to
+the correct audience and channel if found in outputs/. Runs
+standalone — does not chain to Campaign Writer automatically, but
+flags missing copy and instructs the human to run it before launch.
+Skill lives at skills/paid_social_audience_builder/SKILL.md.
+
+CRO Brief — ACTIVE. Triggered by any mention
+of CRO, conversion rate, landing page test, A/B
+test, page underperforming, or fix the landing
+page. Accepts pasted copy, pasted HTML, or a
+plain English description of the page. Reads
+context files, checks for matching ad copy in
+outputs/ to run a message continuity check, and
+connects to Performance Grader findings when
+available. Produces three prioritised tests with
+hypothesis, control, challenger copy, sample size
+calculation, success metrics, and implementation
+notes. Runs standalone — does not chain to other
+skills automatically, but may point to Campaign
+Writer or Landing Page Brief if the diagnosis
+warrants it. Skill lives at
+skills/cro_brief/SKILL.md.
+
+Competitor Ad Intelligence — ACTIVE. Triggered
+by any mention of competitor ads, ad intelligence,
+competitive advertising, competitor brief, or a
+request to see what a specific competitor is
+running. Reads all competitors from
+context/competitors.md and competitive_intel.md,
+searches LinkedIn Ad Library, Google Ads
+Transparency Center, and Meta Ad Library,
+produces a competitive brief with gap analysis
+and counter-angle recommendations anchored to
+proof_points.md, and drafts proposed updates to
+competitive_intel.md for human review. Runs
+standalone weekly on Mondays alongside the
+Trigger Monitor, or on demand. Skill lives at
+skills/competitor_ad_intelligence/SKILL.md.
+
+Budget Allocation Model — ACTIVE. Triggered
+by any mention of budget, allocation, spend
+planning, channel mix, or a dollar amount
+alongside a campaign objective. Reads all
+three core context files and any available
+performance data in outputs/performance/.
+Produces three scenarios — Conservative,
+Recommended, and Aggressive — each with
+channel split, funnel stage split, monthly
+and quarterly projections, and a scenario
+comparison table with a recommendation.
+Projections use benchmarks unless real
+performance data is found, in which case
+actual CPMs, CPCs, and conversion rates
+are used and flagged as such. Runs
+standalone — does not chain to other
+skills automatically. Skill lives at
+skills/budget_allocation_model/SKILL.md.
 
 Performance Grader — ACTIVE. Triggered by
 any reference to performance data, campaign
