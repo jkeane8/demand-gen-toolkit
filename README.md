@@ -1,8 +1,9 @@
 [README.md](https://github.com/user-attachments/files/26769077/README.md)
 # Demand Gen Toolkit
 
-A reusable demand generation system built on Claude Code. Designed for B2B SaaS
-companies. Takes company intelligence as input and produces campaign-ready outputs
+A reusable demand generation system built on Claude Code. Designed for B2B companies across 
+SaaS, fintech, digital health, and 
+platform businesses. Takes company intelligence as input and produces campaign-ready outputs
 across paid search, LinkedIn, email, and ABM — from a single plain-English brief.
 
 Built by John Keane as a portfolio project demonstrating systems-level thinking
