@@ -4,9 +4,6 @@
 A reusable demand generation system built on Claude Code. Takes company intelligence as input and produces campaign-ready outputs
 across paid search, LinkedIn, email, and ABM — from a single plain-English brief.
 
-Built by John Keane as a portfolio project demonstrating systems-level thinking
-in demand generation.
-
 ---
 
 ## The Problem This Solves
